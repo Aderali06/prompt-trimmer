@@ -1,0 +1,52 @@
+[build-system]
+requires = ["setuptools>=61.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "prompt-trimmer"
+version = "0.1.0"
+description = "Automatically compress prompt texts and reduce LLM API token costs using tiktoken."
+readme = "README.md"
+authors = [{ name = "Prompt Trimmer Contributors" }]
+license = { text = "MIT" }
+requires-python = ">=3.9"
+keywords = ["llm", "prompt", "token-compression", "tiktoken", "fastapi", "typer", "openai", "cost-saving"]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Topic :: Scientific/Engineering :: Artificial Intelligence",
+    "Topic :: Software Development :: Libraries :: Python Modules",
+]
+dependencies = [
+    "typer>=0.9.0",
+    "tiktoken>=0.5.0",
+    "rich>=13.0.0",
+    "fastapi>=0.100.0",
+    "uvicorn>=0.22.0",
+    "pydantic>=2.0.0",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=7.0.0",
+    "pytest-cov>=4.0.0",
+    "httpx>=0.24.0",
+]
+
+[project.scripts]
+prompt-trimmer = "prompt_trimmer.main:app"
+
+[tool.setuptools.packages.find]
+include = ["prompt_trimmer*"]
+
+[tool.pytest.ini_options]
+minversion = "7.0"
+addopts = "-ra -q --cov=prompt_trimmer --cov-report=term-missing"
+testpaths = ["tests"]
+python_files = ["test_*.py"]
